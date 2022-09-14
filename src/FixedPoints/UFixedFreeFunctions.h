@@ -28,6 +28,17 @@ constexpr UFixed<Integer * 2, Fraction * 2> multiply(const UFixed<Integer, Fract
 	return ResultType::fromInternal(static_cast<InternalType>(static_cast<InternalType>(left.getInternal()) * static_cast<InternalType>(right.getInternal())));
 }
 
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+constexpr UFixed<IntegerLeft + IntegerRight, FractionLeft + FractionRight>
+  multiply(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right)
+{
+	static_assert((IntegerLeft + IntegerRight + FractionLeft + FractionRight) <= FIXED_POINTS_DETAILS::BitSize<uintmax_t>::Value, "Multiplication cannot be performed, the result type would be too large");
+	
+	using ResultType = UFixed<IntegerLeft + IntegerRight, FractionLeft + FractionRight>;
+	using InternalType = typename ResultType::InternalType;
+	return ResultType::fromInternal(static_cast<InternalType>(static_cast<InternalType>(left.getInternal()) * static_cast<InternalType>(right.getInternal())));
+}
+
 //
 // Postincrement and Postdecrement
 //

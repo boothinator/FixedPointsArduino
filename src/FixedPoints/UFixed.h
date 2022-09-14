@@ -152,6 +152,9 @@ public:
 template< unsigned Integer, unsigned Fraction >
 constexpr UFixed<Integer * 2, Fraction * 2> multiply(const UFixed<Integer, Fraction> & left, const UFixed<Integer, Fraction> & right);
 
+template< unsigned IntegerLeft, unsigned FractionLeft, unsigned IntegerRight, unsigned FractionRight >
+constexpr UFixed<IntegerLeft + IntegerRight, FractionLeft + FractionRight>
+  multiply(const UFixed<IntegerLeft, FractionLeft> & left, const UFixed<IntegerRight, FractionRight> & right)
 
 //
 // Basic Logic Operations
